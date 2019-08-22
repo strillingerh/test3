@@ -14,6 +14,7 @@ xui.Class('App', 'xui.Module',{
             append(
                 xui.create("xui.APICaller")
                 .setHost(host,"api_xml")
+                .setName("api_xml")
                 .setQueryURL("Data/data.xml")
             );
             
@@ -42,7 +43,7 @@ xui.Class('App', 'xui.Module',{
                 xui.create("xui.UI.Div")
                 .setHost(host,"ctl_pane7")
                 .setDock("fill")
-                );
+            );
             
             host.ctl_pane7.append(
                 xui.create("xui.UI.ButtonViews")
@@ -64,8 +65,7 @@ xui.Class('App', 'xui.Module',{
                         "desc":"read json",
                         "type":"control",
                         "target":"api_json",
-                        "args":[
-                        ],
+                        "args":[ ],
                         "method":"invoke",
                         "conditions":[
                             {
@@ -82,7 +82,7 @@ xui.Class('App', 'xui.Module',{
                         "type":"control",
                         "target":"treegrid1",
                         "args":[
-                            {},
+                            { },
                             {
                                 "header":"{temp.okData.header}",
                                 "rows":"{temp.okData.rows}"
@@ -106,8 +106,7 @@ xui.Class('App', 'xui.Module',{
                         "desc":"read xml",
                         "type":"control",
                         "target":"api_xml",
-                        "args":[
-                        ],
+                        "args":[ ],
                         "method":"invoke",
                         "conditions":[
                             {
@@ -124,7 +123,7 @@ xui.Class('App', 'xui.Module',{
                         "type":"control",
                         "target":"treegrid2",
                         "args":[
-                            {},
+                            { },
                             {
                                 "rows":"{temp.okData.rows}",
                                 "header":"{temp.okData.header}"
@@ -145,26 +144,25 @@ xui.Class('App', 'xui.Module',{
                         ]
                     }
                 ])
-                );
+            );
             
             host.ctl_buttonviews1.append(
                 xui.create("xui.UI.TreeGrid")
                 .setHost(host,"treegrid2")
                 .setRowHandler(false)
                 .setColHidable(true)
-                .setColMovable(true)
-                .setHeader({})
-                .setGrpCols({})
-                .setRows({})
-                , "xml");
+                .setColMovable(true),
+                "xml"
+            );
             
             host.ctl_buttonviews1.append(
                 xui.create("xui.UI.TreeGrid")
                 .setHost(host,"treegrid1")
                 .setRowHandler(false)
                 .setColHidable(true)
-                .setColMovable(true)
-                , "json");
+                .setColMovable(true),
+                "json"
+            );
             
             append(
                 xui.create("xui.UI.Button")
@@ -182,7 +180,7 @@ xui.Class('App', 'xui.Module',{
                             {
                                 "editable":true
                             },
-                            {}
+                            { }
                         ],
                         "method":"setProperties",
                         "event":1
@@ -195,15 +193,36 @@ xui.Class('App', 'xui.Module',{
                             {
                                 "editable":true
                             },
-                            {}
+                            { }
                         ],
                         "method":"setProperties"
                     }
                 ])
             );
             
+            append(
+                xui.create("xui.UI.HTMLButton")
+                .setHost(host,"xui_ui_htmlbutton3")
+                .setLeft("40em")
+                .setTop("29.166666666666668em")
+                .setCaption("Native Button")
+                .onClick("_xui_ui_htmlbutton3_onclick")
+            );
+            
             return children;
             // ]]Code created by CrossUI RAD Studio
-        }
+        },
+    /**
+         * Fired when user click it
+         * @method onClick [xui.UI.HTMLButton event]
+         * @param {xui.UIProfile.} profile  The current control's profile object
+         * @param {Event} e , Dom event object
+         * @param {Element.xui} src  id or Dom Element
+        */
+    _xui_ui_htmlbutton3_onclick:function(profile, e, src){
+        var ns = this, uictrl = profile.boxing();
+        
+        ns.treegrid1.removeAllRows();
+    }
     }
 });
